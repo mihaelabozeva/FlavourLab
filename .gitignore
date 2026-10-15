@@ -1,0 +1,18 @@
+# Python virtual environment
+.venv/
+
+# Python cache files
+__pycache__/
+*.py[cod]
+
+# Local database
+db.sqlite3
+
+# Environment variables and secrets
+.env
+
+# macOS files
+.DS_Store
+
+# PyCharm workspace settings
+.idea/
