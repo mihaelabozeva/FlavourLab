@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}{{ ingredient.name }} | FlavorLab{% endblock %}
+
+{% block content %}
+<a class="back" href="{% url 'ingredients:list' %}">Back to all ingredients</a>
+
+<article class="detail cat-{{ ingredient.category }}">
+    <div class="page-head">
+        <div>
+            <span class="category">{{ ingredient.get_category_display }}</span>
+            <h1>{{ ingredient.name }}</h1>
+        </div>
+    </div>
+
+    <p class="intensity">
+        <span class="meter" style="--level: {{ ingredient.intensity }}"></span>
+        Intensity {{ ingredient.intensity }} of 5
+    </p>
+
+    <div class="tags">
+        {% for note in ingredient.flavour_notes.all %}
+            <span class="tag">{{ note.name }}</span>
+        {% empty %}
+            <span class="empty">No flavour notes yet.</span>
+        {% endfor %}
+    </div>
+
+    <div class="description">{{ ingredient.description|linebreaks }}</div>
+</article>
+{% endblock %}

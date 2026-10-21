@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Flavour notes | FlavorLab{% endblock %}
+
+{% block content %}
+<div class="page-head">
+    <h1>Flavour notes</h1>
+    <a class="btn" href="{% url 'ingredients:note_create' %}">Add flavour note</a>
+</div>
+
+{% if notes %}
+<ul class="note-list">
+    {% for note in notes %}
+    <li>
+        <span class="tag">{{ note.name }}</span>
+        <span class="muted">used by {{ note.ingredient_count }} ingredient{{ note.ingredient_count|pluralize }}</span>
+        <a class="btn btn-ghost btn-small" href="{% url 'ingredients:note_delete' note.pk %}">Delete</a>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p class="empty">No flavour notes yet. <a href="{% url 'ingredients:note_create' %}">Add the first one</a>.</p>
+{% endif %}
+{% endblock %}

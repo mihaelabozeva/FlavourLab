@@ -1,0 +1,22 @@
+<form method="get" class="filter-bar">
+    <div class="field">
+        <label for="{{ filter_form.q.id_for_label }}">{{ filter_form.q.label }}</label>
+        {{ filter_form.q }}
+    </div>
+    <div class="field">
+        <label for="{{ filter_form.category.id_for_label }}">{{ filter_form.category.label }}</label>
+        {{ filter_form.category }}
+    </div>
+    <div class="field">
+        <label for="{{ filter_form.note.id_for_label }}">{{ filter_form.note.label }}</label>
+        {{ filter_form.note }}
+    </div>
+    <div class="field">
+        <label for="{{ filter_form.sort.id_for_label }}">{{ filter_form.sort.label }}</label>
+        {{ filter_form.sort }}
+    </div>
+    <div class="actions">
+        <button type="submit" class="btn">Apply filters</button>
+        <a class="btn btn-ghost" href="{% url 'ingredients:list' %}">Reset</a>
+    </div>
+</form>

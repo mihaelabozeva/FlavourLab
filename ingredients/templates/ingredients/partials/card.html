@@ -1,0 +1,13 @@
+<article class="card cat-{{ ingredient.category }}">
+    <span class="category">{{ ingredient.get_category_display }}</span>
+    <h2><a href="{% url 'ingredients:detail' ingredient.pk %}">{{ ingredient.name }}</a></h2>
+    <p class="intensity">
+        <span class="meter" style="--level: {{ ingredient.intensity }}"></span>
+        Intensity {{ ingredient.intensity }} of 5
+    </p>
+    <div class="tags">
+        {% for note in ingredient.flavour_notes.all %}
+            <span class="tag">{{ note.name }}</span>
+        {% endfor %}
+    </div>
+</article>

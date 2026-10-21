@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}{% if object %}Edit {{ object.name }}{% else %}Add ingredient{% endif %} | FlavorLab{% endblock %}
+
+{% block content %}
+<a class="back" href="{% url 'ingredients:list' %}">Back to all ingredients</a>
+<h1>{% if object %}Edit {{ object.name }}{% else %}Add a new ingredient{% endif %}</h1>
+
+<form method="post" class="form-card">
+    {% csrf_token %}
+    {% include 'partials/form_fields.html' %}
+    <div class="actions">
+        <button type="submit" class="btn">{% if object %}Save changes{% else %}Add ingredient{% endif %}</button>
+        <a class="btn btn-ghost" href="{% url 'ingredients:list' %}">Cancel</a>
+    </div>
+</form>
+{% endblock %}

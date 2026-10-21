@@ -1,0 +1,135 @@
+:root {
+    --paper: #f1f4ef;
+    --panel: #ffffff;
+    --ink: #16231e;
+    --muted: #5b6a63;
+    --line: #d5ddd5;
+    --action: #1f5c4a;
+    --alert: #a4281f;
+    --cat: #6b7a74;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    --sans: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: var(--sans);
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.55;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+h1, h2, h3, .brand { font-family: var(--serif); font-weight: 600; line-height: 1.2; }
+h1 { font-size: 2rem; margin: 0 0 0.5rem; }
+
+a { color: var(--action); text-decoration: none; }
+a:hover { text-decoration: underline; }
+:focus-visible { outline: 3px solid var(--action); outline-offset: 2px; }
+
+.container { max-width: 1040px; margin: 0 auto; padding: 0 1.25rem; }
+main { flex: 1; padding-top: 2rem; padding-bottom: 3rem; }
+
+/* Header and footer */
+.site-header { background: var(--ink); }
+.nav { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; padding-top: 0.9rem; padding-bottom: 0.9rem; }
+.brand { color: #fff; font-size: 1.5rem; }
+.brand:hover { text-decoration: none; }
+.nav nav { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+.nav nav a { color: #cfe0d6; font-weight: 500; }
+.nav nav a:hover { color: #fff; text-decoration: none; }
+.site-footer { border-top: 1px solid var(--line); color: var(--muted); padding: 1.25rem 0; text-align: center; font-size: 0.9rem; }
+
+/* Category colours: one hue per category, used by cards, detail pages and the intensity meter */
+.cat-herb { --cat: #3f7d4e; }
+.cat-spice { --cat: #a8442a; }
+.cat-fruit { --cat: #b2336b; }
+.cat-vegetable { --cat: #5b8a1f; }
+.cat-dairy { --cat: #4a78a8; }
+.cat-meat_fish { --cat: #c4604a; }
+.cat-grain { --cat: #a07d1c; }
+.cat-nuts_seeds { --cat: #7a5636; }
+.cat-other { --cat: #6b7a74; }
+
+/* Library */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; }
+
+.card, .detail {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-left: 5px solid var(--cat);
+    border-radius: 8px;
+    padding: 1.1rem 1.25rem;
+}
+.card h2 { margin: 0.1rem 0 0.4rem; font-size: 1.3rem; }
+.card h2 a { color: var(--ink); }
+
+.category { color: var(--cat); font-size: 0.9rem; font-weight: 600; }
+.intensity { color: var(--muted); font-size: 0.9rem; margin: 0.25rem 0 0.8rem; display: flex; align-items: center; gap: 0.6rem; }
+.meter {
+    display: inline-block; width: 74px; height: 7px; border-radius: 4px;
+    background: linear-gradient(to right, var(--cat) calc(var(--level) * 20%), var(--line) 0);
+}
+
+.tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.tag { background: #e6ede8; border-radius: 6px; padding: 0.1rem 0.6rem; font-size: 0.85rem; }
+
+.detail { max-width: 720px; padding: 1.5rem 1.75rem; }
+.description { margin-top: 1.25rem; max-width: 65ch; }
+.description p { margin: 0 0 0.9rem; }
+
+.empty { color: var(--muted); }
+.back { display: inline-block; margin-bottom: 1rem; }
+
+/* Page headings and buttons */
+.page-head { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.25rem; }
+.page-head h1 { margin: 0; }
+.actions { display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; }
+.muted { color: var(--muted); font-size: 0.9rem; }
+
+.btn {
+    display: inline-block; background: var(--action); color: #fff; border: 1px solid var(--action);
+    border-radius: 6px; padding: 0.45rem 1rem; font: inherit; font-weight: 500; cursor: pointer;
+}
+.btn:hover { text-decoration: none; filter: brightness(1.12); }
+.btn-ghost { background: transparent; color: var(--action); }
+.btn-ghost:hover { background: #e6ede8; filter: none; }
+.btn-danger { background: var(--alert); border-color: var(--alert); }
+.btn-small { padding: 0.15rem 0.65rem; font-size: 0.85rem; }
+
+/* Forms */
+.form-card { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 1.5rem; max-width: 560px; }
+.field { display: flex; flex-direction: column; gap: 0.25rem; margin-bottom: 1rem; }
+.field label { font-weight: 600; }
+.field input, .field select, .field textarea {
+    font: inherit; padding: 0.5rem 0.7rem; border: 1px solid #b9c5bc; border-radius: 6px; background: #fff; color: var(--ink);
+}
+.field input[type="checkbox"] { width: auto; padding: 0; }
+.field input:disabled, .field select:disabled, .field textarea:disabled { background: #eef1ee; color: var(--muted); cursor: not-allowed; }
+.field textarea { min-height: 110px; }
+.field > div[id], .field > ul[id] { display: flex; flex-wrap: wrap; gap: 0.4rem 1rem; list-style: none; padding: 0; margin: 0; }
+.field > div[id] label, .field > ul[id] label { font-weight: 400; display: inline-flex; gap: 0.35rem; align-items: center; }
+.help { color: var(--muted); font-size: 0.85rem; }
+.error, .errorlist { color: var(--alert); font-size: 0.9rem; }
+.errorlist { list-style: none; padding: 0; margin: 0 0 0.75rem; }
+
+.messages { list-style: none; padding: 0; margin: 0 0 1.25rem; }
+.message { padding: 0.7rem 1rem; border-radius: 6px; background: #e4f1e8; border: 1px solid #b4d6bf; margin-bottom: 0.5rem; }
+.message.error { background: #fbeae8; border-color: #efb9b4; color: var(--alert); }
+
+.filter-bar {
+    display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: flex-end;
+    background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 1rem; margin-bottom: 1.5rem;
+}
+.filter-bar .field { margin-bottom: 0; }
+
+.pagination { display: flex; justify-content: center; align-items: center; gap: 1rem; margin-top: 2rem; }
+.pagination .current { color: var(--muted); }
+
+.note-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.5rem; max-width: 560px; }
+.note-list li { display: flex; align-items: center; gap: 0.75rem; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 0.6rem 1rem; }
+.note-list .btn { margin-left: auto; }

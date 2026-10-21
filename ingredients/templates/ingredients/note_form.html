@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Add flavour note | FlavorLab{% endblock %}
+
+{% block content %}
+<a class="back" href="{% url 'ingredients:note_list' %}">Back to all flavour notes</a>
+<h1>Add a flavour note</h1>
+
+<form method="post" class="form-card">
+    {% csrf_token %}
+    {% include 'partials/form_fields.html' %}
+    <div class="actions">
+        <button type="submit" class="btn">Add note</button>
+        <a class="btn btn-ghost" href="{% url 'ingredients:note_list' %}">Cancel</a>
+    </div>
+</form>
+{% endblock %}
