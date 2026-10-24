@@ -5,6 +5,10 @@
 {% block content %}
 <a class="back" href="{% url 'ingredients:list' %}">Back to all ingredients</a>
 
+<a href="{% url 'ingredients:update' pk=ingredient.pk %}" class="btn">
+    Edit ingredient
+</a>
+
 <article class="detail cat-{{ ingredient.category }}">
     <div class="page-head">
         <div>
