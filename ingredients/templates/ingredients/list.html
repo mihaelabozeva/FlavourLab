@@ -5,7 +5,11 @@
 {% block content %}
 <div class="page-head">
     <h1>Ingredient library</h1>
+    <a href="{% url 'ingredients:create' %}">+ Add ingredient</a>
+    <a href="{% url 'ingredients:note_list' %}">Manage flavour notes</a>
 </div>
+
+{% include 'ingredients/partials/filter_bar.html' %}
 
 {% if ingredients %}
 <div class="grid">

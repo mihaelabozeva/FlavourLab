@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Delete Pairing | FlavorLab{% endblock %}
+
+{% block content %}
+<h1>Delete Pairing</h1>
+
+<p>
+    Are you sure you want to delete
+    {{ pairing.first_ingredient }} + {{ pairing.second_ingredient }}?
+</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Yes, delete pairing</button>
+    <a href="{% url 'pairings:detail' pairing.pk %}">Cancel</a>
+</form>
+{% endblock %}

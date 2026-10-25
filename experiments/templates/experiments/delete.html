@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Delete Experiment | FlavorLab{% endblock %}
+
+{% block content %}
+<h1>Delete Experiment</h1>
+
+<p>
+    Are you sure you want to delete
+    <strong>{{ experiment.title }}</strong>?
+</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Yes, delete experiment</button>
+    <a href="{% url 'experiments:detail' experiment.pk %}">Cancel</a>
+</form>
+{% endblock %}

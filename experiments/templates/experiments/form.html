@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Save Experiment | FlavorLab{% endblock %}
+
+{% block content %}
+<h1>{% if object %}Edit Experiment{% else %}New Experiment{% endif %}</h1>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save experiment</button>
+</form>
+
+<p>
+    <a href="{% url 'experiments:list' %}">Cancel</a>
+</p>
+{% endblock %}

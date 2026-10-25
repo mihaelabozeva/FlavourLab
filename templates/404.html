@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Page Not Found | FlavorLab{% endblock %}
+
+{% block content %}
+<div class="page-head">
+    <h1>Oops! This page is missing.</h1>
+</div>
+
+<p>The page you requested could not be found.</p>
+<p>Don't worry — there are still plenty of flavours to explore.</p>
+
+<a class="btn" href="{% url 'ingredients:list' %}">
+    Back to ingredients
+</a>
+{% endblock %}

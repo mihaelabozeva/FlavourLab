@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Pairing Details | FlavorLab{% endblock %}
+
+{% block content %}
+<h1>{{ pairing.first_ingredient }} + {{ pairing.second_ingredient }}</h1>
+
+<p>{{ pairing.explanation }}</p>
+
+<p>
+    <a href="{% url 'pairings:update' pairing.pk %}">Edit pairing</a>
+    |
+    <a href="{% url 'pairings:delete' pairing.pk %}">Delete pairing</a>
+    |
+    <a href="{% url 'pairings:list' %}">Back to pairings</a>
+</p>
+{% endblock %}

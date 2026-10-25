@@ -1,9 +1,12 @@
-
 from django import forms
 from .models import Experiment
 
-
 class ExperimentForm(forms.ModelForm):
+    created_at = forms.DateTimeField(
+        label="Created at",
+        required=False,
+        disabled=True,
+    )
     class Meta:
         model = Experiment
         fields = [
@@ -37,3 +40,10 @@ class ExperimentForm(forms.ModelForm):
                 "rows": 4,
             }),
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if self.instance and self.instance.pk:
+            self.fields["created_at"].initial = self.instance.created_at
+        else:
+            self.fields.pop("created_at")

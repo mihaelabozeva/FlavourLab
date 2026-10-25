@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}{{ experiment.title }} | FlavorLab{% endblock %}
+
+{% block content %}
+<h1>{{ experiment.title }}</h1>
+
+<p><strong>Date:</strong> {{ experiment.created_at|date:"d M Y, H:i" }}</p>
+
+<h2>Ingredients used</h2>
+<ul>
+    {% for ingredient in experiment.ingredients.all %}
+        <li>
+            <a href="{% url 'ingredients:detail' ingredient.pk %}">
+                {{ ingredient.name }}
+            </a>
+        </li>
+    {% empty %}
+        <li>No ingredients recorded.</li>
+    {% endfor %}
+</ul>
+
+<h2>Observations</h2>
+<p>{{ experiment.observations|linebreaks }}</p>
+
+<h2>Result</h2>
+<p>{{ experiment.result|linebreaks }}</p>
+
+<p>
+    <a href="{% url 'experiments:update' experiment.pk %}">Edit experiment</a>
+    |
+    <a href="{% url 'experiments:delete' experiment.pk %}">Delete experiment</a>
+    |
+    <a href="{% url 'experiments:list' %}">Back to experiments</a>
+</p>
+{% endblock %}

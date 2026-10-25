@@ -36,3 +36,45 @@ class IngredientForm(forms.ModelForm):
             }),
             "flavour_notes": forms.CheckboxSelectMultiple(),
         }
+
+
+class IngredientFilterForm(forms.Form):
+    q = forms.CharField(
+        required=False,
+        label="Search",
+        widget=forms.TextInput(attrs={
+            "placeholder": "Search ingredients...",
+        }),
+    )
+
+    category = forms.ChoiceField(
+        required=False,
+        label="Category",
+        choices=[("", "All categories")] + list(
+            Ingredient.Category.choices
+        ),
+    )
+
+    note = forms.ModelChoiceField(
+        required=False,
+        label="Flavour note",
+        queryset=None,
+        empty_label="All flavour notes",
+    )
+
+    sort = forms.ChoiceField(
+        required=False,
+        label="Sort by",
+        choices=[
+            ("name", "Name (A–Z)"),
+            ("-name", "Name (Z–A)"),
+            ("intensity", "Intensity (low to high)"),
+            ("-intensity", "Intensity (high to low)"),
+        ],
+        initial="name",
+    )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        from .models import FlavourNote
+        self.fields["note"].queryset = FlavourNote.objects.order_by("name")

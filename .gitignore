@@ -16,3 +16,5 @@ django.db.backends.postgresql
 
 # PyCharm workspace settings
 .idea/
+
+recipes/

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Cooking Experiments | FlavorLab{% endblock %}
+
+{% block content %}
+<div class="page-head">
+    <h1>Cooking Experiments</h1>
+    <a href="{% url 'experiments:create' %}">+ New experiment</a>
+</div>
+
+{% for experiment in experiments %}
+    <article>
+        <h2>
+            <a href="{% url 'experiments:detail' experiment.pk %}">
+                {{ experiment.title }}
+            </a>
+        </h2>
+
+        <p>
+            Created: {{ experiment.created_at|date:"d M Y" }}
+        </p>
+
+        <p>{{ experiment.result|truncatewords:25 }}</p>
+    </article>
+{% empty %}
+    <p class="empty">
+        No experiments yet. Start recording your cooking discoveries!
+    </p>
+{% endfor %}
+{% endblock %}

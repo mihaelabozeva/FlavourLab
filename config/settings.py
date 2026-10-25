@@ -32,7 +32,6 @@ INSTALLED_APPS = [
     'ingredients',
     'pairings',
     'experiments',
-    'recipes',
 ]
 
 MIDDLEWARE = [

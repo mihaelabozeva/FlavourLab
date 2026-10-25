@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load flavour_extras %}
+
 {% block title %}{{ ingredient.name }} | FlavorLab{% endblock %}
 
 {% block content %}
@@ -7,6 +9,10 @@
 
 <a href="{% url 'ingredients:update' pk=ingredient.pk %}" class="btn">
     Edit ingredient
+</a>
+
+<a href="{% url 'ingredients:delete' ingredient.pk %}" class="btn">
+    Delete ingredient
 </a>
 
 <article class="detail cat-{{ ingredient.category }}">
@@ -17,10 +23,7 @@
         </div>
     </div>
 
-    <p class="intensity">
-        <span class="meter" style="--level: {{ ingredient.intensity }}"></span>
-        Intensity {{ ingredient.intensity }} of 5
-    </p>
+   <p>Intensity: {{ ingredient.intensity|intensity_label }}</p>
 
     <div class="tags">
         {% for note in ingredient.flavour_notes.all %}

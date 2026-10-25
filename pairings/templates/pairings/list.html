@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Flavor Pairings | FlavorLab{% endblock %}
+
+{% block content %}
+<h1>Flavor Pairings</h1>
+
+<p>
+    <a href="{% url 'pairings:create' %}">Add a pairing</a>
+</p>
+
+{% for pairing in pairings %}
+    <article>
+        <h2>
+            <a href="{% url 'pairings:detail' pairing.pk %}">
+                {{ pairing.first_ingredient }} +
+                {{ pairing.second_ingredient }}
+            </a>
+        </h2>
+        <p>{{ pairing.explanation|truncatewords:25 }}</p>
+    </article>
+{% empty %}
+    <p>No pairings yet. Add your first one!</p>
+{% endfor %}
+{% endblock %}
