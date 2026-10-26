@@ -24,6 +24,22 @@ class IngredientForm(forms.ModelForm):
             "intensity": "Choose from 1 (very mild) to 5 (very strong).",
             "flavour_notes": "Select all flavour notes that apply.",
         }
+        error_messages = {
+            "name": {
+                "required": "Please enter a name for the ingredient.",
+                "unique": "An ingredient with this name already exists.",
+                "max_length": "The name can be at most 80 characters long.",
+            },
+            "description": {
+                "required": "Please describe the ingredient.",
+            },
+            "intensity": {
+                "required": "Please choose an intensity from 1 to 5.",
+                "min_value": "Intensity must be at least 1.",
+                "max_value": "Intensity cannot be higher than 5.",
+                "invalid": "Intensity must be a whole number.",
+            },
+        }
         widgets = {
             "name": forms.TextInput(attrs={
                 "placeholder": "e.g. Fresh basil",

@@ -3,15 +3,15 @@
 {% block title %}Save Experiment | FlavorLab{% endblock %}
 
 {% block content %}
-<h1>{% if object %}Edit Experiment{% else %}New Experiment{% endif %}</h1>
+<a class="back" href="{% url 'experiments:list' %}">Back to experiments</a>
+<h1>{% if object %}Edit experiment{% else %}Add an experiment{% endif %}</h1>
 
-<form method="post">
+<form method="post" class="form-card">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save experiment</button>
+    {% include 'partials/form_fields.html' %}
+    <div class="actions">
+        <button type="submit" class="btn">Save experiment</button>
+        <a class="btn btn-ghost" href="{% url 'experiments:list' %}">Cancel</a>
+    </div>
 </form>
-
-<p>
-    <a href="{% url 'experiments:list' %}">Cancel</a>
-</p>
 {% endblock %}

@@ -1,10 +1,9 @@
 from django.db.models import Count
-from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from ingredients.forms import IngredientForm, IngredientFilterForm
 from ingredients.models import Ingredient, FlavourNote
-
+from django.contrib.messages.views import SuccessMessageMixin
 
 # Create your views here.
 class IngredientListView(ListView):
@@ -48,23 +47,34 @@ class IngredientDetailView(DetailView):
     def get_queryset(self):
         return super().get_queryset().prefetch_related("flavour_notes")
 
-class IngredientCreateView(CreateView):
+class IngredientCreateView(SuccessMessageMixin,CreateView):
     model = Ingredient
     form_class = IngredientForm
     template_name = "ingredients/form.html"
     success_url = reverse_lazy("ingredients:list")
+    success_message = "Ingredient added successfully."
 
-class IngredientUpdateView(UpdateView):
+class IngredientUpdateView(SuccessMessageMixin,UpdateView):
     model = Ingredient
     form_class = IngredientForm
     template_name = "ingredients/form.html"
     success_url = reverse_lazy("ingredients:list")
+    success_message = "Ingredient updated."
 
-class IngredientDeleteView(DeleteView):
+class IngredientDeleteView(SuccessMessageMixin,DeleteView):
     model = Ingredient
     template_name = "ingredients/delete.html"
     context_object_name = "ingredient"
     success_url = reverse_lazy("ingredients:list")
+    success_message = "Ingredient deleted."
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["pairing_count"] = (
+            self.object.pairings_as_first.count()
+            + self.object.pairings_as_second.count()
+        )
+        return context
 
 class FlavourNoteListView(ListView):
     model = FlavourNote

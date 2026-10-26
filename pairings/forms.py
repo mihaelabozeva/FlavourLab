@@ -21,6 +21,11 @@ class PairingForm(forms.ModelForm):
             "second_ingredient": "Choose a different ingredient.",
             "explanation": "Explain how their flavours complement each other.",
         }
+        error_messages = {
+            "first_ingredient": {"required": "Please choose the first ingredient."},
+            "second_ingredient": {"required": "Please choose the second ingredient."},
+            "explanation": {"required": "Please explain why these ingredients work together."},
+        }
         widgets = {
             "explanation": forms.Textarea(attrs={
                 "placeholder": (
@@ -29,15 +34,3 @@ class PairingForm(forms.ModelForm):
                 "rows": 4,
             }),
         }
-
-    def clean(self):
-        cleaned_data = super().clean()
-        first = cleaned_data.get("first_ingredient")
-        second = cleaned_data.get("second_ingredient")
-
-        if first and second and first == second:
-            raise forms.ValidationError(
-                "Choose two different ingredients for a pairing."
-            )
-
-        return cleaned_data

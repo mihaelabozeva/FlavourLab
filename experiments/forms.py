@@ -26,6 +26,12 @@ class ExperimentForm(forms.ModelForm):
             "observations": "Record what you noticed while cooking.",
             "result": "Describe what worked, what did not, and what you learned.",
         }
+        error_messages = {
+            "title": {"required": "Please give your experiment a title."},
+            "ingredients": {"required": "Select at least one ingredient."},
+            "observations": {"required": "Please record your observations."},
+            "result": {"required": "Please describe the result."},
+        }
         widgets = {
             "title": forms.TextInput(attrs={
                 "placeholder": "e.g. Testing lemon with basil",

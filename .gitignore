@@ -1,13 +1,12 @@
 # Python virtual environment
 .venv/
-
+venv/
 # Python cache files
 __pycache__/
 *.py[cod]
 
 # Local database
-django.db.backends.postgresql
-
+db.sqlite3
 # Environment variables and secrets
 .env
 
@@ -17,4 +16,3 @@ django.db.backends.postgresql
 # PyCharm workspace settings
 .idea/
 
-recipes/

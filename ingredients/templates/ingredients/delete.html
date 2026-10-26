@@ -1,16 +1,26 @@
 {% extends "base.html" %}
+{% load flavour_extras %}
 
 {% block title %}Delete {{ object.name }} | FlavorLab{% endblock %}
 
 {% block content %}
 <h1>Delete {{ object.name }}?</h1>
-<p>This cannot be undone. Check the details below before you confirm.</p>
+<p>This cannot be undone.</p>
+
+<ul>
+    <li>Category: {{ object.get_category_display }}</li>
+    <li>Intensity: {{ object.intensity|intensity_label }}</li>
+</ul>
+
+{% if pairing_count %}
+<p class="error">
+    Deleting this ingredient will also delete {{ pairing_count }}
+    pairing{{ pairing_count|pluralize }} that use it.
+</p>
+{% endif %}
 
 <form method="post" class="form-card">
     {% csrf_token %}
-    {% with form=display_form %}
-        {% include 'partials/form_fields.html' %}
-    {% endwith %}
     <div class="actions">
         <button type="submit" class="btn btn-danger">Delete ingredient</button>
         <a class="btn btn-ghost" href="{% url 'ingredients:detail' object.pk %}">Keep it</a>
